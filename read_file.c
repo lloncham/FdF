@@ -53,6 +53,22 @@ int		colomn_nb(char *str)
 	return (colomn);
 }
 
+int		get_nbr(char *str)
+{
+	int	i;
+	int	nbr;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && str[i] >= 0 && str[i] <= 9)
+	{
+		nbr = ft_atoi(str[i]);
+		i++;
+	}
+	return (nbr);
+}
+
 int		main(int ac, char **av)
 {
 	int		fd;

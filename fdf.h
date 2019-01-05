@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "./libft/libft.h"
+#include "./minilibx_macos/mlx.h"
 #include <stdlib.h>
 
 char	chardup(char c);
@@ -14,5 +15,6 @@ int		line_nb(char *str);
 int		colomn(char *str);
 int		size_str(int fd, char *buff);
 char	ft_chardup(char c);
-int		valid_char(char c);
+int		valid_char(char *s);
+
 #endif

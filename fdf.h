@@ -5,16 +5,15 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "./libft/libft.h"
 #include "./minilibx_macos/mlx.h"
-#include <stdlib.h>
 
-char	chardup(char c);
-char	*read_file(int fd, char *str);
-int		line_nb(char *str);
-int		colomn(char *str);
-int		size_str(int fd, char *buff);
-char	ft_chardup(char c);
-int		valid_char(char *s);
+int		deal_key(int key, void *param);
+//int		**read_line(int fd, int nb_line);
+//int		count_line(int fd);
+//int		count_words(char **split);
+//void	error(void);
+int		valid_char(char *str);
 
 #endif

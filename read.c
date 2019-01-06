@@ -63,7 +63,8 @@ int		main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		fd = open(av[1], O_RDONLY);
+		if ((fd = open(av[1], O_RDONLY)) == -1)
+			error();
 			if ((tab = read_line(fd, nb_line)) == 0)
 				error();
 		close(fd);

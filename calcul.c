@@ -1,25 +1,35 @@
-int		bresenham()
-{
-	//definir W && H
-	//definir x1;
-	//definir x2;
-	//definir y1;
-	//definir y2;
-	int dx;
-	int dy;
-	int a;
-	
-	dx = x2-x1;
-	dy = y2-y1;
-	a = abs(dy)/abs(dx);
+#include "fdf.h"
 
+int		draw(t_fdf *d)
+{
+	float dx;
+	float dy;
+	float a;
+	float x;
+	float y;
+
+	x = d->x[0];
+	y = d->y[0];
+	dx = d->x[1] - d->x[0];
+	dy = d->y[1] - d->y[0];
+	a = ABS(dy)/ABS(dx);
 	if (dx > dy)
 	{
-		(dx > 0) ? x++ : x--;
-		(dy > 0) ? y += a : y -= a;
+		while (x != d->x[1])
+		{
+			mlx_pixel_put(d->mlx, d->win, y, x, 0xFFFFFF);
+			(dx > 0) ? x++ : x--;
+			(dy > 0) ? (y += a) : (y -= a);
+		}
 	}
 	else
 	{
-		(dy > 0) ? y++ : y--;
-		(dx > 0) ? x += a : x -= a;
+		while (y != d->y[1])
+		{
+			mlx_pixel_put(d->mlx, d->win, y, x, 0xFFFFFF);
+			(dy > 0) ? y++ : y--;
+			(dx > 0) ? (x += a) : (x -= a);
+		}
 	}
+	return (0);
+}

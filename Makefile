@@ -2,7 +2,7 @@ NAME = fdf
 
 CFLAG = -Wall -Wextra -Werror
 
-SRC = main.c
+SRC = main.c calcul.c
 
 OBJECTS = (SRC:.c=.o)
 

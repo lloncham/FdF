@@ -9,11 +9,26 @@
 #include "./libft/libft.h"
 #include "./minilibx_macos/mlx.h"
 
-int		deal_key(int key, void *param);
-//int		**read_line(int fd, int nb_line);
-//int		count_line(int fd);
-//int		count_words(char **split);
-//void	error(void);
+# define H 1000
+# define W 1000
+# define ABS(Value) (Value < 0 ? -(Value): Value)
+
+typedef struct		s_fdf
+{
+	int *mlx;
+	int *win;
+	int *img;
+	int	x[2];
+	int y[2];
+}					t_fdf;
+
+int		draw(t_fdf *d);
+int		deal_key(int key, t_fdf *ptr);
+int		mouse_hook(int button, int x, int y, t_fdf *ptr);
+int		count_line(int fd, char **av);
+int		**read_line(int fd, int nbline);
+int		count_words(char **split);
+void	error(void);
 int		valid_char(char *str);
 
 #endif

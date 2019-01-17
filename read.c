@@ -6,15 +6,22 @@ void	error()
 	exit(0);
 }
 
-int		count_line(int fd)
+int		count_line(int fd, char **av)
 {
 	int		i;
 	char	*line;
+	int		nbline;
 
 	i = 0;
+	fd = open(av[1], O_RDONLY);
 	while (get_next_line(fd, &line))
-		i++;
-	return (i);
+	{
+		nbline++;
+		if (line)
+			free(line);
+	}
+	close(fd);
+	return (nbline);
 }
 
 int		count_words(char **split)
@@ -27,7 +34,7 @@ int		count_words(char **split)
 	return (i);
 }
 
-int		**read_line(int fd, int nb_line)
+int		**read_line(int fd, int nbline)
 {
 	char	**split;
 	int		**tab;
@@ -35,11 +42,10 @@ int		**read_line(int fd, int nb_line)
 	int		j;
 	int		i;
 	
-	i = 0;
 	j = 0;
-	if (!(tab = (int **)malloc(sizeof(int *) * 50 + 1)))
+	if (!(tab = (int **)malloc(sizeof(int *) * nbline + 1)))
 		return (0);
-	if (!(split = (char **)malloc(sizeof(char*) * 50 + 1)))
+	if (!(split = (char **)malloc(sizeof(char*) * nbline + 1)))
 		return (0);
 	while (get_next_line(fd, &line))
 	{	
@@ -48,8 +54,13 @@ int		**read_line(int fd, int nb_line)
 		split = ft_strsplit(line, ' ');
 		if (!(tab[j] = (int *)malloc(sizeof(int) * count_words(split) + 1)))
 			return (0);
-		tab[j][i] = atoi(split[i]);
-		i++;
+		i = 0;
+		while (split[i])
+		{
+			tab[j][i] = ft_atoi(split[i]);
+			free(split[i]);
+			i++;
+		}
 		j++;
 	}
 	return (tab);
@@ -58,14 +69,17 @@ int		**read_line(int fd, int nb_line)
 int		main(int ac, char **av)
 {
 	int fd;
-	int nb_line;
+	int nbline;
 	int	**tab;
+	t_map *map;
 
 	if (ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) == -1)
 			error();
-			if ((tab = read_line(fd, nb_line)) == 0)
+			if (!(nbline = count_line(fd, av)))
+				error();
+			if (!(tab = read_line(fd, nbline)))
 				error();
 		close(fd);
 	}

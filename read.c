@@ -13,6 +13,7 @@ int		count_line(int fd, char **av)
 	int		nbline;
 
 	i = 0;
+	nbline = 0;
 	fd = open(av[1], O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
@@ -66,22 +67,18 @@ int		**read_line(int fd, int nbline)
 	return (tab);
 }
 
-int		main(int ac, char **av)
+int		read_file(char **av)
 {
 	int fd;
-	int nbline;
 	int	**tab;
-	t_map *map;
+	t_fdf d;
 
-	if (ac == 2)
-	{
-		if ((fd = open(av[1], O_RDONLY)) == -1)
-			error();
-			if (!(nbline = count_line(fd, av)))
-				error();
-			if (!(tab = read_line(fd, nbline)))
-				error();
-		close(fd);
-	}
-	return (0);
+	if ((fd = open(av[1], O_RDONLY)) == -1)
+		error();
+	d.nbline = count_line(fd, av);
+	ft_putnbr(d.nbline);
+	if (!(tab = read_line(fd, d.nbline)))
+		error();
+	close(fd);
+	return(0);
 }

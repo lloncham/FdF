@@ -4,20 +4,17 @@
 
 int		mouse_hook(int button, int x, int y, t_fdf *ptr)
 {
-	printf("BUTTON = %d - Y = %d - X = %d\n", button, y, x);
 	if (button == 1)
 	{
 		ptr->x[0] = x;
 		ptr->y[0] = y;
 	}
-	printf("Y1 = %d - X1 = %d\n", ptr->y[0], ptr->x[0]);
 	if (button == 2)
 	{
 		ptr->x[1] = x;
 		ptr->y[1] = y;
 		draw(ptr);
 	}
-	printf("Y2 = %d - X2 = %d\n", ptr->y[1], ptr->x[1]);
 	return (0);
 }
 
@@ -45,10 +42,13 @@ void	mlx(t_fdf *ptr)
 	mlx_loop(ptr->mlx);
 }
 
-int main()
+int main(int ac, char **av)
 {
 	t_fdf ptr;
 
+	if (ac != 2)
+		error();
+	read_file(av);
 	mlx(&ptr);
 	return(0);
 }

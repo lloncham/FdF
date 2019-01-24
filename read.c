@@ -1,8 +1,8 @@
 #include "fdf.h"
 
-void	error()
+void	error(char *str)
 {
-	ft_putendl("error");
+	ft_putendl(str);
 	exit(0);
 }
 
@@ -51,7 +51,7 @@ int		**read_line(int fd, int nbline)
 	while (get_next_line(fd, &line))
 	{	
 		if (valid_char(line) == 0)
-			return (0);
+			error("not valid char");
 		split = ft_strsplit(line, ' ');
 		if (!(tab[j] = (int *)malloc(sizeof(int) * count_words(split) + 1)))
 			return (0);
@@ -62,23 +62,24 @@ int		**read_line(int fd, int nbline)
 			free(split[i]);
 			i++;
 		}
+		tab[j][i] = -2147483648;
+
 		j++;
 	}
 	return (tab);
 }
 
-int		read_file(char **av)
+t_fdf	read_file(char **av)
 {
 	int fd;
-	int	**tab;
 	t_fdf d;
 
 	if ((fd = open(av[1], O_RDONLY)) == -1)
-		error();
+		error("error");
 	d.nbline = count_line(fd, av);
 	ft_putnbr(d.nbline);
-	if (!(tab = read_line(fd, d.nbline)))
-		error();
+	if (!(d.tab = read_line(fd, d.nbline)))
+		error("pb de read");
 	close(fd);
-	return(0);
+	return(d);
 }

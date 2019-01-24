@@ -34,8 +34,8 @@ void	mlx(t_fdf *ptr)
 {
 	ptr->mlx = mlx_init();
 	ptr->win = mlx_new_window(ptr->mlx, H, W, "FdF");
+	draw_line(ptr);
 	ptr->img = mlx_new_image(ptr->mlx, H, W);
-	mlx_pixel_put(ptr->mlx, ptr->win, 250, 250, 0xFFFFFF);
 	mlx_mouse_hook(ptr->win, mouse_hook, ptr);
 	mlx_key_hook(ptr->win, deal_key, ptr);
 //	mlx_put_image_to_window(mlx, win, img_ptr, 0, 0);
@@ -47,8 +47,8 @@ int main(int ac, char **av)
 	t_fdf ptr;
 
 	if (ac != 2)
-		error();
-	read_file(av);
+		error("usage : fdf maptest");
+	ptr = read_file(av);
 	mlx(&ptr);
 	return(0);
 }

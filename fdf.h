@@ -21,16 +21,18 @@ typedef struct		s_fdf
 	int	x[2];
 	int y[2];
 	int nbline;
+	int **tab;
 }					t_fdf;
 
+void	draw_line(t_fdf *d);
 void	draw(t_fdf *d);
 int		deal_key(int key, t_fdf *ptr);
 int		mouse_hook(int button, int x, int y, t_fdf *ptr);
 int		count_line(int fd, char **av);
 int		**read_line(int fd, int nbline);
 int		count_words(char **split);
-void	error(void);
-int		read_file(char **av);
+void	error(char *str);
+t_fdf	read_file(char **av);
 int		valid_char(char *str);
 
 #endif

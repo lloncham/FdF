@@ -63,7 +63,6 @@ int		**read_line(int fd, int nbline)
 			i++;
 		}
 		tab[j][i] = -2147483648;
-
 		j++;
 	}
 	return (tab);
@@ -77,7 +76,6 @@ t_fdf	read_file(char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("error");
 	d.nbline = count_line(fd, av);
-	ft_putnbr(d.nbline);
 	if (!(d.tab = read_line(fd, d.nbline)))
 		error("pb de read");
 	close(fd);

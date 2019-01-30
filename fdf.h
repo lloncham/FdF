@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 11:45:33 by lloncham          #+#    #+#             */
-/*   Updated: 2019/01/25 18:22:16 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/01/30 14:50:31 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 #include "./libft/libft.h"
 #include "./minilibx_macos/mlx.h"
 
-# define H 500 
-# define W 500
+# define H 1500 
+# define W 1500
 # define ABS(Value) (Value < 0 ? -(Value): Value)
 
 typedef struct		s_fdf
 {
+	int choose;
 	int	movy;
 	int movx;
 	int z;

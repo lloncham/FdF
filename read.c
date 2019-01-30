@@ -1,9 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/30 14:52:41 by lloncham          #+#    #+#             */
+/*   Updated: 2019/01/30 15:36:35 by lloncham         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	error(char *str)
+int		malloc_r(int **tab, char **split, int nbline)
 {
-	ft_putendl(str);
-	exit(0);
+	if (!(tab = (int **)malloc(sizeof(int *) * nbline + 1)))
+		return (0);
+	if (!(split = (char **)malloc(sizeof(char*) * nbline + 1)))
+		return (0);
+	return (1);
 }
 
 int		count_line(int fd, char **av)
@@ -44,9 +59,7 @@ int		**read_line(int fd, int nbline)
 	int		i;
 	
 	j = 0;
-	if (!(tab = (int **)malloc(sizeof(int *) * nbline + 1)))
-		return (0);
-	if (!(split = (char **)malloc(sizeof(char*) * nbline + 1)))
+	if (malloc_r(tab, split, nbline) == 0)
 		return (0);
 	while (get_next_line(fd, &line))
 	{	

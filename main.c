@@ -42,6 +42,14 @@ void	ft_put_pixel(t_fdf *p, int y, int x, int color)
 	p->img_data[y * W + x] = color;	
 }
 
+void	ft_put_info(t_fdf *ptr)
+{
+	mlx_string_put(ptr->mlx, ptr->win, 20, 20, 0xFFFFFF, "MENU");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 60, 0xFFFFFF, "Zoom : + / -");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 80, 0xFFFFFF, "Move : -> / <- / .. / .. ");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 100, 0xFFFFFF, "Altitude : h / b");
+}
+
 int		deal_key(int key, t_fdf *ptr)
 {
 	ft_putnbr(key);
@@ -62,6 +70,7 @@ int		deal_key(int key, t_fdf *ptr)
 		(key == 4) ? (ptr->z += 1) : (ptr->z -= 1);
 	draw(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
+	ft_put_info(ptr);
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
@@ -74,8 +83,8 @@ void	mlx(t_fdf *ptr)
 {
 	ptr->z = 20;
 	ptr->choose = 1;
-	ptr->movy = 50;
-	ptr->movx = 50;
+	ptr->movy = 0;
+	ptr->movx = 0;
 	ptr->zoom = 10;
 	ptr->mlx = mlx_init();
 	ptr->win = mlx_new_window(ptr->mlx, H, W, "FdF");
@@ -85,6 +94,7 @@ void	mlx(t_fdf *ptr)
 	mlx_hook(ptr->win, 2, 0, deal_key, ptr);
 	mlx_mouse_hook(ptr->win, mouse_hook, ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
+	ft_put_info(ptr);
 	mlx_loop(ptr->mlx);
 }
 

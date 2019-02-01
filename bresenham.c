@@ -11,7 +11,7 @@ void	draw_line(t_fdf *d)
 	yinc = (dy > 0) ? 1 : -1;
 	dx = abs(dx);
 	dy = abs(dy);
-	ft_put_pixel(d, y, x, 0xFF7F7F);
+	ft_put_pixel(d, y, x, d->color);
 	if (dx > dy)
 	{
 		cumul = dx / 2;
@@ -25,7 +25,7 @@ void	draw_line(t_fdf *d)
 				cumul -= dx;
 				y += yinc;
 			}
-			ft_put_pixel(d, y, x, 0xFF7F7F);
+			ft_put_pixel(d, y, x, d->color);
 		}
 	}
 	else
@@ -41,7 +41,7 @@ void	draw_line(t_fdf *d)
 				cumul -= dy;
 				x += xinc;
 			}
-			ft_put_pixel(d, y, x, 0xFF7F7F);
+			ft_put_pixel(d, y, x, d->color);
 		}
 	}
 }

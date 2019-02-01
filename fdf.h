@@ -21,9 +21,8 @@
 #include "./libft/libft.h"
 #include "./minilibx_macos/mlx.h"
 
-# define H 1500 
-# define W 1500
-# define ABS(Value) (Value < 0 ? -(Value): Value)
+# define H 700 
+# define W 700
 
 typedef struct		s_fdf
 {
@@ -41,12 +40,12 @@ typedef struct		s_fdf
 	int *img;
 	int	x[2];
 	int y[2];
-	int xiso[2];
-	int yiso[2];
+	int color;
 	int nbline;
 	int **tab;
 }					t_fdf;
 
+void	deco(t_fdf *d);
 void	ft_put_pixel(t_fdf *p, int x, int y, int color);
 void	draw_line(t_fdf *d);
 void	draw(t_fdf *d);

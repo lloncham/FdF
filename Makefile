@@ -14,7 +14,7 @@ NAME = fdf
 
 CFLAG = -Wall -Wextra -Werror
 
-SRC = main.c read.c valid_file.c bresenham.c
+SRC = main.c read.c valid_file.c bresenham.c deco.c
 
 OBJECTS = $(SRC:.c=.o)
 

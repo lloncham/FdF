@@ -50,7 +50,7 @@ int		count_words(char **split)
 	return (i);
 }
 
-int		**read_line(int fd, int nbline)
+int		**read_line(int fd, t_fdf d)
 {
 	char	**split;
 	int		**tab;
@@ -59,14 +59,15 @@ int		**read_line(int fd, int nbline)
 	int		i;
 	
 	j = 0;
-	if (malloc_r(tab, split, nbline) == 0)
+	if (malloc_r(tab, split, d.nbline) == 0)
 		return (0);
 	while (get_next_line(fd, &line))
 	{	
 		if (valid_char(line) == 0)
 			error("not valid char");
 		split = ft_strsplit(line, ' ');
-		if (!(tab[j] = (int *)malloc(sizeof(int) * count_words(split) + 1)))
+		d.nbcol = count_words(split);
+		if (!(tab[j] = (int *)malloc(sizeof(int) * d.nbcol + 1)))
 			return (0);
 		i = 0;
 		while (split[i])
@@ -89,7 +90,7 @@ t_fdf	read_file(char **av)
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("error");
 	d.nbline = count_line(fd, av);
-	if (!(d.tab = read_line(fd, d.nbline)))
+	if (!(d.tab = read_line(fd, d)))
 		error("pb de read");
 	close(fd);
 	return(d);

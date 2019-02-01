@@ -11,7 +11,10 @@ void	deco_up(t_fdf *d)
 		x = 0;
 		while (x < W)
 		{
-			ft_put_pixel(d, y, x, d->color);
+			if (y > 38)
+				ft_put_pixel(d, y, x, 0xFFFFFF);
+			else
+				ft_put_pixel(d, y, x, d->color);
 			x++;
 		}
 		y++;
@@ -29,11 +32,23 @@ void	deco_down(t_fdf *d)
 		x = 0;
 		while (x < W)
 		{
-			ft_put_pixel(d, y, x, d->color);
+			if (y < H - 38)
+				ft_put_pixel(d, y, x, 0xFFFFFF);
+			else
+				ft_put_pixel(d, y, x, d->color);
 			x++;
 		}
 		y++;
 	}
+}
+void	ft_put_info(t_fdf *ptr)
+{
+	mlx_string_put(ptr->mlx, ptr->win, W/2 - 1.5, 10, 0xFFFFFF, "FDF");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 45, 0xFFFFFF, "MENU");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 70, 0xFFFFFF, "line : click left / click right");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 90, 0xFFFFFF, "Move : -> / <- / .. / .. ");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 110, 0xFFFFFF, "Zoom : + / -");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 130, 0xFFFFFF, "Altitude : h / b");
 }
 
 void	deco(t_fdf *d)

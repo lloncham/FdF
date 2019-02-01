@@ -42,9 +42,11 @@ typedef struct		s_fdf
 	int y[2];
 	int color;
 	int nbline;
+	int nbcol;
 	int **tab;
 }					t_fdf;
 
+void	ft_put_info(t_fdf *d);
 void	deco(t_fdf *d);
 void	ft_put_pixel(t_fdf *p, int x, int y, int color);
 void	draw_line(t_fdf *d);
@@ -52,7 +54,7 @@ void	draw(t_fdf *d);
 int		deal_key(int key, t_fdf *ptr);
 int		mouse_hook(int button, int x, int y, t_fdf *ptr);
 int		count_line(int fd, char **av);
-int		**read_line(int fd, int nbline);
+int		**read_line(int fd, t_fdf d);
 int		count_words(char **split);
 void	error(char *str);
 t_fdf	read_file(char **av);

@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 14:02:45 by lloncham          #+#    #+#             */
-/*   Updated: 2019/01/30 16:26:40 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:38:57 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ int		mouse_hook(int button, int x, int y, t_fdf *ptr)
 	return (0);
 }
 
-int		clear_img(t_fdf *ptr)
-{
-	bzero(ptr->img_data, W * H * 4);
-	return (0);
-}
-
-void	ft_put_pixel(t_fdf *p, int y, int x, int color)
-{
-	if (x < 0 || y < 0 || x >= W || y >= H)
-		return ;
-	p->img_data[y * W + x] = color;
-}
-
 int		deal_key(int key, t_fdf *ptr)
 {
 	ft_putnbr(key);
@@ -50,10 +37,7 @@ int		deal_key(int key, t_fdf *ptr)
 	if (key == 49)
 		ptr->color += 1;
 	if (key == 35 || key == 34)
-	{
 		(key == 35) ? (ptr->choose = 1) : (ptr->choose = 2);
-		(key == 35) ? ptr->z : (ptr->z = -ptr->z);
-	}
 	if (key == 123 || key == 124)
 		(key == 123) ? (ptr->movx -= 5) : (ptr->movx += 5);
 	if (key == 125 || key == 126)
@@ -79,7 +63,7 @@ void	mlx(t_fdf *ptr)
 	ptr->z = 20;
 	ptr->choose = 1;
 	ptr->movy = H/2 - (ptr->nbline / 2);
-	ptr->movx = W/2 - (ptr->nbcol / 2);
+	ptr->movx = W/2;
 	ptr->zoom = 10;
 	ptr->color = 0xFF;
 	ptr->mlx = mlx_init();

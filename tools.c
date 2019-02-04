@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_file.c                                       :+:      :+:    :+:   */
+/*   tool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/30 14:52:32 by lloncham          #+#    #+#             */
-/*   Updated: 2019/01/30 15:07:08 by lloncham         ###   ########.fr       */
+/*   Created: 2019/02/04 15:10:13 by lloncham          #+#    #+#             */
+/*   Updated: 2019/02/04 16:39:16 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+#include "fdf.h"
 
 int		valid_char(char *str)
 {
@@ -19,7 +19,8 @@ int		valid_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-' && str[i] != '+' && str[i] != '\n' && str[i] != '\0')
+		if (!ft_isdigit(str[i]) && str[i] != ' ' &&
+				str[i] != '-' && str[i] != '+' && str[i] != '\n' && str[i] != '\0')
 			return (0);
 		i++;
 	}
@@ -30,4 +31,22 @@ void	error(char *str)
 {
 	ft_putendl(str);
 	exit(0);
+}
+
+int		clear_img(t_fdf *ptr)
+{
+	bzero(ptr->img_data, W * H * 4);
+	return (0);
+}
+
+void	ft_put_pixel(t_fdf *p, int y, int x, int color)
+{
+	if (x < 0 || y < 0 || x >= W || y >= H)
+		return ;
+	if (p->alt * p->z == 0)
+		p->img_data[y * W + x] = color + 0xBDF7;
+	if (p->alt * p->z < 0)
+		p->img_data[y * W + x] = color + 0x79E0 - 50;
+	if (p->alt * p->z > 0)
+		p->img_data[y * W + x] = color + 0x79E0;
 }

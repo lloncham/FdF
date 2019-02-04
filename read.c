@@ -6,20 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:52:41 by lloncham          #+#    #+#             */
-/*   Updated: 2019/01/30 15:36:35 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:17:51 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int		malloc_r(int **tab, char **split, int nbline)
-{
-	if (!(tab = (int **)malloc(sizeof(int *) * nbline + 1)))
-		return (0);
-	if (!(split = (char **)malloc(sizeof(char*) * nbline + 1)))
-		return (0);
-	return (1);
-}
 
 int		count_line(int fd, char **av)
 {
@@ -42,7 +33,7 @@ int		count_line(int fd, char **av)
 
 int		count_words(char **split)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (split[i])
@@ -53,39 +44,36 @@ int		count_words(char **split)
 int		**read_line(int fd, t_fdf d)
 {
 	char	**split;
-	int		**tab;
 	char	*line;
 	int		j;
 	int		i;
-	
+
 	j = 0;
-	if (malloc_r(tab, split, d.nbline) == 0)
+	if (!(d.tab = (int **)malloc(sizeof(int *) * d.nbline)))
 		return (0);
 	while (get_next_line(fd, &line))
-	{	
+	{
 		if (valid_char(line) == 0)
 			error("not valid char");
 		split = ft_strsplit(line, ' ');
-		d.nbcol = count_words(split);
-		if (!(tab[j] = (int *)malloc(sizeof(int) * d.nbcol + 1)))
+		if (!(d.tab[j] = (int *)malloc(sizeof(int) * count_words(split) + 1)))
 			return (0);
 		i = 0;
 		while (split[i])
 		{
-			tab[j][i] = ft_atoi(split[i]);
-			free(split[i]);
+			d.tab[j][i] = ft_atoi(split[i]);
 			i++;
 		}
-		tab[j][i] = -2147483648;
+		d.tab[j][i] = -2147483648;
 		j++;
 	}
-	return (tab);
+	return (d.tab);
 }
 
 t_fdf	read_file(char **av)
 {
-	int fd;
-	t_fdf d;
+	int		fd;
+	t_fdf	d;
 
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("error");
@@ -93,5 +81,5 @@ t_fdf	read_file(char **av)
 	if (!(d.tab = read_line(fd, d)))
 		error("pb de read");
 	close(fd);
-	return(d);
+	return (d);
 }

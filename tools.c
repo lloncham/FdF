@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 15:10:13 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/04 16:39:16 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:42:26 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	ft_put_pixel(t_fdf *p, int y, int x, int color)
 {
 	if (x < 0 || y < 0 || x >= W || y >= H)
 		return ;
-	if (p->alt * p->z == 0)
+	if (p->alt == 0)
 		p->img_data[y * W + x] = color + 0xBDF7;
-	if (p->alt * p->z < 0)
+	if (p->alt < 0)
 		p->img_data[y * W + x] = color + 0x79E0 - 50;
-	if (p->alt * p->z > 0)
+	if (p->alt > 0)
 		p->img_data[y * W + x] = color + 0x79E0;
 }

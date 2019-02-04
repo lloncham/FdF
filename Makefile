@@ -6,7 +6,7 @@
 #    By: lloncham <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 12:43:02 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/04 15:19:59 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/04 18:05:57 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all : $(NAME)
 $(NAME): $(OBJECTS)
 		$(MAKE) -C libft
 		$(MAKE) -C minilibx_macos
-		gcc -g -fsanitize=address $(CFLAG) -o $(NAME) $(OBJECTS) -L./libft -lft -g -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+		gcc $(CFLAG) -o $(NAME) $(OBJECTS) -L./libft -lft -g -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 clean :
 		@make -C minilibx_macos clean

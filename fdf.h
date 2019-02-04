@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 11:45:33 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/04 16:37:05 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/04 18:19:21 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct		s_fdf
 	int y[2];
 	int color;
 	int nbline;
-	int nbcol;
 	int alt;
 	int **tab;
 }					t_fdf;

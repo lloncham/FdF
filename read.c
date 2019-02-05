@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 14:52:41 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/04 18:17:51 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:46:39 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,13 @@ int		**read_line(int fd, t_fdf d)
 		while (split[i])
 		{
 			d.tab[j][i] = ft_atoi(split[i]);
+			if (split)
+				free(split[i]);
 			i++;
 		}
+		if (line)
+			free(line);
+		free(split);
 		d.tab[j][i] = -2147483648;
 		j++;
 	}

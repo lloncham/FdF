@@ -6,7 +6,7 @@
 #    By: lloncham <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/23 12:43:02 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/04 18:05:57 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/05 10:47:41 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 CFLAG = -Wall -Wextra -Werror
 
-SRC = main.c read.c tools.c bresenham.c deco.c
+SRC = main.c read.c tools.c bresenham.c deco.c projections.c
 
 OBJECTS = $(SRC:.c=.o)
 

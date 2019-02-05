@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 15:10:13 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/04 16:42:26 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:31:56 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		valid_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ' &&
-				str[i] != '-' && str[i] != '+' && str[i] != '\n' && str[i] != '\0')
+		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-' &&
+				str[i] != '+' && str[i] != '\n' && str[i] != '\0')
 			return (0);
 		i++;
 	}

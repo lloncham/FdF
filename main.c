@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 14:02:45 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/04 17:56:32 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:54:02 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,27 @@ int		deal_key(int key, t_fdf *ptr)
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
-		exit (0);
+		exit(0);
 	}
 	return (0);
 }
 
 void	mlx(t_fdf *ptr)
 {
+	int bpp;
+	int endian;
+	int size_l;
+
 	ptr->z = 20;
 	ptr->choose = 1;
-	ptr->movy = H/2 - (ptr->nbline / 2);
-	ptr->movx = W/2;
+	ptr->movy = H / 2 - ((ptr->nbline * 4) / 2);
+	ptr->movx = W / 2;
 	ptr->zoom = 10;
 	ptr->color = 0xFF;
 	ptr->mlx = mlx_init();
-	ptr->win = mlx_new_window(ptr->mlx, H, W, "FdF");
+	ptr->win = mlx_new_window(ptr->mlx, W, H, "FdF");
 	ptr->img = mlx_new_image(ptr->mlx, W, H);
-	ptr->img_data = (int *)mlx_get_data_addr(ptr->img, &ptr->bpp, &ptr->size_l, &ptr->endian);
+	ptr->img_data = (int *)mlx_get_data_addr(ptr->img, &bpp, &size_l, &endian);
 	deco(ptr);
 	draw(ptr);
 	mlx_hook(ptr->win, 2, 0, deal_key, ptr);
@@ -87,5 +91,5 @@ int		main(int ac, char **av)
 		error("usage : fdf maptest");
 	ptr = read_file(av);
 	mlx(&ptr);
-	return(0);
+	return (0);
 }

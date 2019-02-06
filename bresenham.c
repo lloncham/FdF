@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:17:57 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 11:08:08 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:42:03 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,46 +27,52 @@ t_bre	init_bre(t_fdf *d)
 	return (i);
 }
 
-void	draw_line(t_fdf *d)
+void	slow_line(t_fdf *d, t_bre b)
 {
-	t_bre	b;
 	int		i;
-	
-	b = init_bre(d);
-	printf("x = %d\n", b.x);	
-	ft_put_pixel(d, b.y, b.x, d->color);
-	if (b.dx > b.dy)
+
+	b.cumul = b.dx / 2;
+	i = 1;
+	while (i++ <= b.dx)
 	{
-		b.cumul = b.dx / 2;
-		i = 1;
-		while (i++ <= b.dx)
+		b.x += b.xinc;
+		b.cumul += b.dy;
+		if (b.cumul >= b.dx)
 		{
-			b.x += b.xinc;
-			b.cumul += b.dy;
-			if (b.cumul >= b.dx)
-			{
-				b.cumul -= b.dx;
-				b.y += b.yinc;
-			}
-			ft_put_pixel(d, b.y, b.x, d->color);
-		}
-	}
-	else
-	{
-		b.cumul = b.dy / 2;
-		i = 1;
-		while (i++ <= b.dy)
-		{
+			b.cumul -= b.dx;
 			b.y += b.yinc;
-			b.cumul += b.dx;
-			if (b.cumul >= b.dy)
-			{
-				b.cumul -= b.dy;
-				b.x += b.xinc;
-			}
-			ft_put_pixel(d, b.y, b.x, d->color);
 		}
+		ft_put_pixel(d, b.y, b.x, d->color);
 	}
 }
 
+void	fast_line(t_fdf *d, t_bre b)
+{
+	int		i;
 
+	b.cumul = b.dy / 2;
+	i = 1;
+	while (i++ <= b.dy)
+	{
+		b.y += b.yinc;
+		b.cumul += b.dx;
+		if (b.cumul >= b.dy)
+		{
+			b.cumul -= b.dy;
+			b.x += b.xinc;
+		}
+		ft_put_pixel(d, b.y, b.x, d->color);
+	}
+}
+
+void	draw_line(t_fdf *d)
+{
+	t_bre	b;
+
+	b = init_bre(d);
+	ft_put_pixel(d, b.y, b.x, d->color);
+	if (b.dx > b.dy)
+		slow_line(d, b);
+	else
+		fast_line(d, b);
+}

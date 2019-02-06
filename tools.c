@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 15:10:13 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 12:31:56 by lloncham         ###   ########.fr       */
+/*   Created: 2019/02/06 11:55:34 by lloncham          #+#    #+#             */
+/*   Updated: 2019/02/06 16:43:11 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int		valid_file(char *str)
+{
+	char	*s;
+	int		i;
+	int		j;
+
+	s = ".fdf";
+	j = ft_strlen(s);
+	i = ft_strlen(str);
+	while (j != 0)
+	{
+		if (str[i--] != s[j--])
+			return (0);
+	}
+	return (1);
+}
 
 int		valid_char(char *str)
 {
@@ -19,8 +36,13 @@ int		valid_char(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-' &&
-				str[i] != '+' && str[i] != '\n' && str[i] != '\0')
+		if (str[i] == ',')
+		{
+			while (str[i] != ' ')
+				i++;
+		}
+		if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-'
+				&& str[i] != '+' && str[i] != '\n' && str[i] != '\0')
 			return (0);
 		i++;
 	}
@@ -46,7 +68,7 @@ void	ft_put_pixel(t_fdf *p, int y, int x, int color)
 	if (p->alt == 0)
 		p->img_data[y * W + x] = color + 0xBDF7;
 	if (p->alt < 0)
-		p->img_data[y * W + x] = color + 0x79E0 - 50;
+		p->img_data[y * W + x] = color + 0x79E0 - 100;
 	if (p->alt > 0)
-		p->img_data[y * W + x] = color + 0x79E0;
+		p->img_data[y * W + x] = color + 0x79E0 + 100;
 }

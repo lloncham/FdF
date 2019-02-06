@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 11:45:33 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 12:27:13 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:58:20 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "./libft/libft.h"
 # include "./minilibx_macos/mlx.h"
 
-# define H 1000
-# define W 1700
+# define H 1200
+# define W 2500 
 
 typedef struct		s_fdf
 {
@@ -39,6 +39,7 @@ typedef struct		s_fdf
 	int				y[2];
 	int				color;
 	int				nbline;
+	int				nbcol;
 	int				alt;
 	int				**tab;
 }					t_fdf;
@@ -54,6 +55,7 @@ typedef	struct		s_bre
 	int				cumul;
 }					t_bre;
 
+int					valid_file(char *str);
 void				ft_put_info(t_fdf *d);
 void				deco(t_fdf *d);
 void				ft_put_pixel(t_fdf *p, int x, int y, int color);

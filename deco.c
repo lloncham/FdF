@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 15:29:25 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 10:40:31 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/06 18:14:18 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	deco_up(t_fdf *d)
 		while (x < W)
 		{
 			if (y > 38)
-				ft_put_pixel(d, y, x, 0xFFFFFF);
+				d->img_data[y * W + x] = 0xFFFFFF;
 			else
 				ft_put_pixel(d, y, x, d->color);
 			x++;
@@ -45,7 +45,7 @@ void	deco_down(t_fdf *d)
 		while (x < W)
 		{
 			if (y < H - 38)
-				ft_put_pixel(d, y, x, 0xFFFFFF);
+				d->img_data[y * W + x] = 0xFFFFFF;
 			else
 				ft_put_pixel(d, y, x, d->color);
 			x++;
@@ -58,13 +58,15 @@ void	ft_put_info(t_fdf *ptr)
 {
 	mlx_string_put(ptr->mlx, ptr->win, W / 2 - 1.5, 10, 0xFFFFFF, "FDF");
 	mlx_string_put(ptr->mlx, ptr->win, 20, 45, 0xFFFFFF, "MENU");
-	mlx_string_put(ptr->mlx, ptr->win, 20, 70,
+	mlx_string_put(ptr->mlx, ptr->win, 20, 75,
 			0xFFFFFF, "Draw line : click left / click right");
-	mlx_string_put(ptr->mlx, ptr->win, 20, 90,
-			0xFFFFFF, "Move : -> / <- / .. / .. ");
-	mlx_string_put(ptr->mlx, ptr->win, 20, 110, 0xFFFFFF, "Zoom : + / -");
-	mlx_string_put(ptr->mlx, ptr->win, 20, 130, 0xFFFFFF, "Altitude : h / b");
-	mlx_string_put(ptr->mlx, ptr->win, 20, 150, 0xFFFFFF, "Projection : i / p");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 95,
+			0xFFFFFF, "Move : -> / <- / up one / down one ");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 115, 0xFFFFFF, "Zoom : + / -");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 135, 0xFFFFFF, "Altitude : h / b");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 155, 0xFFFFFF, "Projection : i / p");
+	mlx_string_put(ptr->mlx, ptr->win, 20, 175,
+			0xFFFFFF, "Change color : space");
 }
 
 void	deco(t_fdf *d)

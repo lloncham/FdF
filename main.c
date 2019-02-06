@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 14:02:45 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 12:54:02 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/06 18:15:47 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ int		mouse_hook(int button, int x, int y, t_fdf *ptr)
 
 int		deal_key(int key, t_fdf *ptr)
 {
-	ft_putnbr(key);
-	ft_putchar('\n');
 	clear_img(ptr);
 	if (key == 49)
-		ptr->color += 1;
+		ptr->color += 10;
 	if (key == 35 || key == 34)
-		(key == 35) ? (ptr->choose = 1) : (ptr->choose = 2);
+	{
+		(key == 35) ? (ptr->choose = 1) : 0;
+		(key == 34) ? (ptr->choose = 2) : 0;
+	}
 	if (key == 123 || key == 124)
 		(key == 123) ? (ptr->movx -= 5) : (ptr->movx += 5);
 	if (key == 125 || key == 126)
@@ -45,16 +46,15 @@ int		deal_key(int key, t_fdf *ptr)
 	if (key == 69 || key == 78)
 		(key == 69) ? (ptr->zoom += 1) : (ptr->zoom -= 1);
 	if (key == 4 || key == 11)
-		(key == 4) ? (ptr->z += 1) : (ptr->z -= 1);
-	draw(ptr);
-	deco(ptr);
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
-	ft_put_info(ptr);
+		(key == 4) ? (ptr->z -= 1) : (ptr->z += 1);
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
 		exit(0);
 	}
+	draw(ptr);
+	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->img, 0, 0);
+	ft_put_info(ptr);
 	return (0);
 }
 
@@ -64,17 +64,19 @@ void	mlx(t_fdf *ptr)
 	int endian;
 	int size_l;
 
-	ptr->z = 20;
+	ptr->z = 1;
 	ptr->choose = 1;
-	ptr->movy = H / 2 - ((ptr->nbline * 4) / 2);
-	ptr->movx = W / 2;
-	ptr->zoom = 10;
+	if (ptr->nbline >= ptr->nbcol)
+		ptr->zoom = ((H / 3) / ptr->nbline);
+	else
+		ptr->zoom = ((W / 3) / ptr->nbcol);
+	ptr->movy = H / 2 - ((ptr->nbline / 2) * ptr->zoom);
+	ptr->movx = W / 2 - ((ptr->nbcol / 2) * ptr->zoom);
 	ptr->color = 0xFF;
 	ptr->mlx = mlx_init();
 	ptr->win = mlx_new_window(ptr->mlx, W, H, "FdF");
 	ptr->img = mlx_new_image(ptr->mlx, W, H);
 	ptr->img_data = (int *)mlx_get_data_addr(ptr->img, &bpp, &size_l, &endian);
-	deco(ptr);
 	draw(ptr);
 	mlx_hook(ptr->win, 2, 0, deal_key, ptr);
 	mlx_mouse_hook(ptr->win, mouse_hook, ptr);

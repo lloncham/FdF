@@ -6,7 +6,7 @@
 #    By: lloncham <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:32:00 by lloncham          #+#    #+#              #
-#    Updated: 2018/11/29 14:37:56 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/06 17:33:51 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,18 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c f
 
 OBJECTS = $(SRC:.c=.o)
 
+.SILENT :
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJECTS)
 	@gcc -Wall -Wextra -Werror -c $(SRC)
 	@ar rc $(NAME) $(OBJECTS)
-	@echo "Ready!"
 
 clean:
 	@rm -f $(OBJECTS)
-	@echo "Clean!"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "All clean!"
 
 re: fclean all
 

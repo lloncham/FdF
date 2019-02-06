@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 12:40:05 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/05 12:01:46 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:50:10 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				ft_ret(char **line, char **tmp, int new)
 {
 	char		*old;
 
-	if (new == 0 && ft_strlen(*tmp) == 0)
+	if (new == 0)
 		return (0);
 	if (ft_strchr(*tmp, '\n') != NULL)
 	{

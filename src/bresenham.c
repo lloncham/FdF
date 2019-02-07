@@ -6,11 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:17:57 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 14:42:03 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:58:12 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 t_bre	init_bre(t_fdf *d)
 {

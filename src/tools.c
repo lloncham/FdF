@@ -6,11 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 11:55:34 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 16:43:11 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:59:01 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 int		valid_file(char *str)
 {
@@ -69,6 +69,8 @@ void	ft_put_pixel(t_fdf *p, int y, int x, int color)
 		p->img_data[y * W + x] = color + 0xBDF7;
 	if (p->alt < 0)
 		p->img_data[y * W + x] = color + 0x79E0 - 100;
-	if (p->alt > 0)
+	if (p->alt > 0 && p->alt <= 3)
+		p->img_data[y * W + x] = color + 0x79E0;
+	if (p->alt > 3)
 		p->img_data[y * W + x] = color + 0x79E0 + 100;
 }

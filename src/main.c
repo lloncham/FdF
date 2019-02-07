@@ -6,11 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 14:02:45 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 18:15:47 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:58:30 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 int		mouse_hook(int button, int x, int y, t_fdf *ptr)
 {
@@ -34,13 +34,12 @@ int		deal_key(int key, t_fdf *ptr)
 	clear_img(ptr);
 	if (key == 49)
 		ptr->color += 10;
-	if (key == 35 || key == 34)
-	{
-		(key == 35) ? (ptr->choose = 1) : 0;
-		(key == 34) ? (ptr->choose = 2) : 0;
-	}
+	if (key == 35)
+		ptr->choose = 1;
+	if (key == 34)
+		ptr->choose = 2;
 	if (key == 123 || key == 124)
-		(key == 123) ? (ptr->movx -= 5) : (ptr->movx += 5);
+		(key == 123) ? (ptr->movx -= 30) : (ptr->movx += 30);
 	if (key == 125 || key == 126)
 		(key == 125) ? (ptr->movy += 5) : (ptr->movy -= 5);
 	if (key == 69 || key == 78)
@@ -50,6 +49,7 @@ int		deal_key(int key, t_fdf *ptr)
 	if (key == 53)
 	{
 		mlx_destroy_window(ptr->mlx, ptr->win);
+		free_tab(ptr);
 		exit(0);
 	}
 	draw(ptr);
@@ -64,7 +64,7 @@ void	mlx(t_fdf *ptr)
 	int endian;
 	int size_l;
 
-	ptr->z = 1;
+	ptr->z = 0;
 	ptr->choose = 1;
 	if (ptr->nbline >= ptr->nbcol)
 		ptr->zoom = ((H / 3) / ptr->nbline);
@@ -85,12 +85,24 @@ void	mlx(t_fdf *ptr)
 	mlx_loop(ptr->mlx);
 }
 
+void	free_tab(t_fdf *f)
+{
+	int i;
+
+	i = 0;
+	if (!f->tab)
+		return ;
+	while (++i < f->nbline)
+		free(f->tab[i]);
+	free(f->tab);
+}
+
 int		main(int ac, char **av)
 {
 	t_fdf ptr;
 
 	if (ac != 2)
-		error("usage : fdf maptest");
+		error("usage : [./fdf] [maptest.fdf]");
 	ptr = read_file(av);
 	mlx(&ptr);
 	return (0);

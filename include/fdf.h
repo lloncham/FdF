@@ -6,7 +6,7 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 11:45:33 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 17:58:20 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:59:24 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
-# include "./minilibx_macos/mlx.h"
+# include "../libft/libft.h"
+# include "../minilibx_macos/mlx.h"
 
 # define H 1200
 # define W 2500 
@@ -55,6 +55,7 @@ typedef	struct		s_bre
 	int				cumul;
 }					t_bre;
 
+void				free_tab(t_fdf *d);
 int					valid_file(char *str);
 void				ft_put_info(t_fdf *d);
 void				deco(t_fdf *d);
@@ -63,9 +64,6 @@ void				draw_line(t_fdf *d);
 void				draw(t_fdf *d);
 int					deal_key(int key, t_fdf *ptr);
 int					mouse_hook(int button, int x, int y, t_fdf *ptr);
-int					count_line(int fd, char **av);
-int					**read_line(int fd, t_fdf d);
-int					count_words(char **split);
 void				error(char *str);
 t_fdf				read_file(char **av);
 int					valid_char(char *str);

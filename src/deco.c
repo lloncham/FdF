@@ -6,11 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 15:29:25 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 18:14:18 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:58:20 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 void	deco_up(t_fdf *d)
 {
@@ -61,7 +61,7 @@ void	ft_put_info(t_fdf *ptr)
 	mlx_string_put(ptr->mlx, ptr->win, 20, 75,
 			0xFFFFFF, "Draw line : click left / click right");
 	mlx_string_put(ptr->mlx, ptr->win, 20, 95,
-			0xFFFFFF, "Move : -> / <- / up one / down one ");
+			0xFFFFFF, "Move : > / < / ^ / v ");
 	mlx_string_put(ptr->mlx, ptr->win, 20, 115, 0xFFFFFF, "Zoom : + / -");
 	mlx_string_put(ptr->mlx, ptr->win, 20, 135, 0xFFFFFF, "Altitude : h / b");
 	mlx_string_put(ptr->mlx, ptr->win, 20, 155, 0xFFFFFF, "Projection : i / p");

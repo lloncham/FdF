@@ -6,11 +6,11 @@
 /*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 10:43:46 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/06 16:09:35 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/07 14:58:40 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 void	iso_h(t_fdf *d, int x, int y)
 {
